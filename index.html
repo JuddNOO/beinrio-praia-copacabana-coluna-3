@@ -85,8 +85,19 @@
 
 
 <div id="map">
-  <img src="./assets/0-sala-de-estar.png" alt="Planta baixa do empreendmento.">
-  <p> PLANTA PADRÃO APARTAMENTO <br> ÁREA PRIVATIVA : 43,21m² </p> 
+  <img id="minimapImage" src="" alt="Planta baixa do empreendmento.">
+  <p> PLANTA PADRÃO APARTAMENTO <br> ÁREA PRIVATIVA : 43,21 m² </p> 
+</div>
+
+<!-- NOTA LEGAL TRIGGER -->
+<a href="javascript:void(0)" id="notaLegalToggle">Ver nota legal</a>
+
+<!-- NOTA LEGAL MODAL -->
+<div id="notaLegalOverlay">
+  <div id="notaLegalBox">
+    <p>Tour virtual meramente ilustrativo (sugestão de decoração). Móveis, equipamentos e objetos não estão inclusos na entrega da unidade. O imóvel será entregue conforme o Memorial Descritivo. Consulte as condições com o Opportunity.</p>
+    <button id="notaLegalClose">Fechar</button>
+  </div>
 </div>
 
 
@@ -105,6 +116,28 @@
 
 <script src="data.js"></script>
 <script src="index.js"></script>
+
+<script>
+  var toggle = document.getElementById('notaLegalToggle');
+  var overlay = document.getElementById('notaLegalOverlay');
+  var closeBtn = document.getElementById('notaLegalClose');
+
+  toggle.addEventListener('click', function() {
+    overlay.classList.add('visible');
+  });
+
+  closeBtn.addEventListener('click', function() {
+    overlay.classList.remove('visible');
+  });
+
+  // Also close when clicking outside the white box
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      overlay.classList.remove('visible');
+    }
+  });
+</script>
+
 
 </body>
 </html>

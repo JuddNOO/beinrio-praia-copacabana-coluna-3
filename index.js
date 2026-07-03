@@ -234,12 +234,18 @@ function switchScene(scene) {
     sceneListToggleElement.classList.toggle('enabled');
   }
 
-     function updateScenePlanta(scene) {
+  function updateScenePlanta(scene) {
+    var mapDiv = document.querySelector('#map');
     var mapImg = document.querySelector('#map img');
+    if (!scene.data.minimap) {
+      mapDiv.style.display = 'none';
+      return;
+    }
     mapImg.style.opacity = '0';
     setTimeout(function() {
-      mapImg.src = './assets/' + scene.data.id + '.png';
+      mapImg.src = './' + scene.data.minimap;
       mapImg.style.opacity = '1';
+      mapDiv.style.display = '';
     }, 400);
   }
 
@@ -357,8 +363,16 @@ function switchScene(scene) {
 
     // Create a modal for the hotspot content to appear on mobile mode.
     var modal = document.createElement('div');
-    modal.innerHTML = wrapper.innerHTML;
     modal.classList.add('info-hotspot-modal');
+
+    // Inner box holds the actual header/text content and sizes itself
+    // to fit that content, while the modal itself is just the full-screen
+    // centering backdrop.
+    var modalBox = document.createElement('div');
+    modalBox.classList.add('info-hotspot-modal-box');
+    modalBox.innerHTML = wrapper.innerHTML;
+    modal.appendChild(modalBox);
+
     document.body.appendChild(modal);
 
     var toggle = function() {
